@@ -8,6 +8,8 @@
 package org.jhotdraw.draw.action;
 
 import java.util.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.util.ResourceBundleUtil;
@@ -19,7 +21,6 @@ import org.jhotdraw.util.ResourceBundleUtil;
  * @version $Id$
  */
 public class SelectSameAction extends AbstractSelectedAction {
-
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.selectSame";
 
@@ -32,6 +33,7 @@ public class SelectSameAction extends AbstractSelectedAction {
         labels.configureAction(this, ID);
         updateEnabledState();
     }
+    @FeatureEntryPoint(value = "select")
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {

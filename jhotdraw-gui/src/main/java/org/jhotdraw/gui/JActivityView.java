@@ -9,6 +9,7 @@
  */
 package org.jhotdraw.gui;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.gui.ActivityModel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -293,6 +294,8 @@ public class JActivityView extends javax.swing.JPanel {
         closeButton.setEnabled(false);
         putClientProperty(REQUEST_REMOVE_PROPERTY, true);
     }//GEN-LAST:event_close
+
+    @FeatureEntryPoint(value = "close")
     private void cancel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel
         model.cancel();
         model.setNote("Cancelling...");

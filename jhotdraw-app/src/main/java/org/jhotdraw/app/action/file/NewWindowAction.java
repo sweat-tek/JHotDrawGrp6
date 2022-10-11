@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.app.action.file;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Application;
 
 /**
@@ -31,6 +32,7 @@ public class NewWindowAction extends NewFileAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "file.newWindow";
+    @FeatureEntryPoint(value = "new")
 
     /**
      * Creates a new instance.
@@ -38,4 +40,5 @@ public class NewWindowAction extends NewFileAction {
     public NewWindowAction(Application app) {
         super(app, ID);
     }
+
 }
