@@ -31,6 +31,8 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Disposable;
 import org.jhotdraw.draw.DefaultDrawingEditor;
 import org.jhotdraw.draw.Drawing;
@@ -194,6 +196,8 @@ public class SVGDrawingPanel extends JPanel implements Disposable {
      * Creates a new Drawing object which can be used with this
      * {@code SVGDrawingPanel}.
      */
+
+
     public Drawing createDrawing() {
         Drawing drawing = new QuadTreeDrawing();
         LinkedList<InputFormat> inputFormats = new LinkedList<InputFormat>();

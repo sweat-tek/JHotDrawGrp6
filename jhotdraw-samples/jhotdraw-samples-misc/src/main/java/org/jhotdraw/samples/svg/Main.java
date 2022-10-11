@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.samples.svg;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Application;
 import org.jhotdraw.app.OSXApplication;
 import org.jhotdraw.app.SDIApplication;
@@ -28,6 +29,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // Debug resource bundle
+
         ResourceBundleUtil.setVerbose(true);
         Application app;
         String os = System.getProperty("os.name").toLowerCase();
