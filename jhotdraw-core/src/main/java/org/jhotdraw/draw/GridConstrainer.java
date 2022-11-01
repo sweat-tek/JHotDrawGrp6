@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import java.awt.*;
 import java.awt.geom.*;
@@ -366,6 +367,7 @@ public class GridConstrainer extends AbstractConstrainer {
         fireStateChanged();
     }
 
+    @FeatureEntryPoint(value="draw grid")
     @Override
     public void draw(Graphics2D g, DrawingView view) {
         if (isVisible) {

@@ -9,6 +9,8 @@ package org.jhotdraw.draw.action;
 
 import java.awt.Rectangle;
 import javax.swing.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.*;
 
 /**
@@ -45,6 +47,7 @@ public class ZoomAction extends AbstractDrawingViewAction {
     }
 
     @Override
+    @FeatureEntryPoint(value="Zoom action")
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (button != null) {
             button.setText(label);
