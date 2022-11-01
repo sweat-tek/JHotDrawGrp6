@@ -10,6 +10,16 @@
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
+			<groupId>dk.sdu.mmmi</groupId>
+			<artifactId>featuretracerlite</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.9</version>
+		</dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>jhotdraw-core</artifactId>
 			<version>${project.version}</version>
@@ -18,16 +28,6 @@
 			<groupId>org.devzendo</groupId>
 			<artifactId>Quaqua</artifactId>
 			<version>7.3.4</version>
-		</dependency>
-		<dependency>
-			<groupId>dk.sdu.mmmi</groupId>
-			<artifactId>featuretracer</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.9</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.htmlunit</groupId>

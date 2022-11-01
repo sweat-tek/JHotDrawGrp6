@@ -30,6 +30,7 @@ public class Main {
     @FeatureEntryPoint(value="main")
     public static void main(String[] args) {
         // Debug resource bundle
+
         ResourceBundleUtil.setVerbose(true);
         Application app;
         String os = System.getProperty("os.name").toLowerCase();
