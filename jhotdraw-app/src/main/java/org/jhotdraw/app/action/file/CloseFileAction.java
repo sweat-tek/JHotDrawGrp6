@@ -41,7 +41,6 @@ public class CloseFileAction extends AbstractSaveUnsavedChangesAction {
     /**
      * Creates a new instance.
      */
-    @FeatureEntryPoint(value = "closefile")
     public CloseFileAction(Application app, View view) {
         super(app, view);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
@@ -49,6 +48,7 @@ public class CloseFileAction extends AbstractSaveUnsavedChangesAction {
     }
 
     @Override
+    @FeatureEntryPoint(value = "closefile")
     protected void doIt(View view) {
         if (view != null && view.getApplication() != null) {
             Application app = view.getApplication();

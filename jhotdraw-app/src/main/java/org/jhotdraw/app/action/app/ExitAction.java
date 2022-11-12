@@ -56,13 +56,12 @@ public class ExitAction extends AbstractApplicationAction {
     /**
      * Creates a new instance.
      */
-    @FeatureEntryPoint(value = "exitapp")
     public ExitAction(Application app) {
         super(app);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
         labels.configureAction(this, ID);
     }
-    @FeatureEntryPoint(value = "exit")
+
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -348,7 +347,7 @@ public class ExitAction extends AbstractApplicationAction {
             }
         }.execute();
     }
-
+    @FeatureEntryPoint(value = "exitapp")
     protected void doExit() {
         getApplication().destroy();
     }
