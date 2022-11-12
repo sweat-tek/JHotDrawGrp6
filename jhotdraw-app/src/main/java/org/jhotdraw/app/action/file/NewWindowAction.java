@@ -28,15 +28,14 @@ import org.jhotdraw.api.app.Application;
  * @author Werner Randelshofer
  * @version $Id$
  */
+
 public class NewWindowAction extends NewFileAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "file.newWindow";
-
     /**
      * Creates a new instance.
      */
-    @FeatureEntryPoint(value = "newwindow")
     public NewWindowAction(Application app) {
         super(app, ID);
     }

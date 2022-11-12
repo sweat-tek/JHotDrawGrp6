@@ -42,6 +42,8 @@ import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.action.edit.AbstractFindAction;
 import org.jhotdraw.action.edit.ClearSelectionAction;
 import org.jhotdraw.action.edit.CopyAction;
@@ -232,6 +234,7 @@ public class MDIApplication extends AbstractApplication {
     }
 
     @Override
+    @FeatureEntryPoint(value = "newwindow")
     protected ActionMap createViewActionMap(View v) {
         ActionMap intermediateMap = new ActionMap();
         intermediateMap.put(FocusWindowAction.ID, new FocusWindowAction(v));

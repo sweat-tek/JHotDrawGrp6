@@ -64,6 +64,7 @@ public class ExitAction extends AbstractApplicationAction {
 
 
     @Override
+    @FeatureEntryPoint(value = "exitapp")
     public void actionPerformed(ActionEvent evt) {
         final Application app = getApplication();
         if (app.isEnabled()) {
@@ -347,7 +348,6 @@ public class ExitAction extends AbstractApplicationAction {
             }
         }.execute();
     }
-    @FeatureEntryPoint(value = "exitapp")
     protected void doExit() {
         getApplication().destroy();
     }
