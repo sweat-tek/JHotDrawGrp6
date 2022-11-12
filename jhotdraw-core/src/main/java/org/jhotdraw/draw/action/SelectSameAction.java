@@ -33,11 +33,7 @@ public class SelectSameAction extends AbstractSelectedAction {
         labels.configureAction(this, ID);
         updateEnabledState();
     }
-<<<<<<< HEAD
-    @FeatureEntryPoint(value = "Select")
-=======
     @FeatureEntryPoint(value = "select")
->>>>>>> 46d469475664bfd5b3dfc6899be4cfd59e18d3fb
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
