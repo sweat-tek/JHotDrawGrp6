@@ -71,6 +71,7 @@ public class ClearSelectionAction extends AbstractSelectionAction {
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.action.Labels");
         labels.configureAction(this, ID);
     }
+    @FeatureEntryPoint(value = "Select")
 
     @Override
     public void actionPerformed(ActionEvent evt) {

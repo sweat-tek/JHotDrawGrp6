@@ -60,7 +60,6 @@ public class SelectAllAction extends AbstractSelectionAction {
         this(null);
     }
     @FeatureEntryPoint(value = "select")
-
     /**
      * Creates a new instance which acts on the specified component.
      *

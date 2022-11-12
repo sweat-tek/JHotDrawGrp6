@@ -7,7 +7,6 @@
  */
 package org.jhotdraw.draw.action;
 
-import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.*;
 import org.jhotdraw.util.ActionUtil;
 import org.jhotdraw.util.ResourceBundleUtil;
