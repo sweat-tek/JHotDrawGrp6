@@ -15,6 +15,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.geom.Bezier;
 import org.jhotdraw.geom.BezierPath;
 
@@ -87,6 +89,7 @@ public class BezierDemo extends javax.swing.JPanel {
         }
     }
     private MouseHandler handler = new MouseHandler();
+
 
     private class Canvas extends JPanel {
 

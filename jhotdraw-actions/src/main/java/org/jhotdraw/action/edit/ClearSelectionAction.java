@@ -59,7 +59,7 @@ public class ClearSelectionAction extends AbstractSelectionAction {
     public ClearSelectionAction() {
         this(null);
     }
-
+    @FeatureEntryPoint(value = "select")
     /**
      * Creates a new instance which acts on the specified component.
      *

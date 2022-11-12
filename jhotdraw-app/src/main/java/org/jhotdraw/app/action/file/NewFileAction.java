@@ -8,6 +8,8 @@
 package org.jhotdraw.app.action.file;
 
 import java.awt.event.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Application;
 import org.jhotdraw.api.app.View;
 import org.jhotdraw.action.AbstractApplicationAction;
@@ -48,6 +50,7 @@ public class NewFileAction extends AbstractApplicationAction {
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
         labels.configureAction(this, id);
     }
+    @FeatureEntryPoint(value = "new")
 
     @Override
     public void actionPerformed(ActionEvent evt) {
