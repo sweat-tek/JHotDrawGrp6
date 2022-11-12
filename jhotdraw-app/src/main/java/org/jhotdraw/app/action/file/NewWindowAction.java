@@ -32,7 +32,7 @@ public class NewWindowAction extends NewFileAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "file.newWindow";
-    @FeatureEntryPoint(value = "new")
+    @FeatureEntryPoint(value = "newwindow")
 
     /**
      * Creates a new instance.

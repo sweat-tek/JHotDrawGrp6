@@ -50,9 +50,10 @@ public class NewFileAction extends AbstractApplicationAction {
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
         labels.configureAction(this, id);
     }
-    @FeatureEntryPoint(value = "new")
+
 
     @Override
+    @FeatureEntryPoint(value = "newfile")
     public void actionPerformed(ActionEvent evt) {
         Application app = getApplication();
         final View newView = app.createView();

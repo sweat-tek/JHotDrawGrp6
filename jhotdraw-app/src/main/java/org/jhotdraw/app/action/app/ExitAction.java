@@ -56,6 +56,7 @@ public class ExitAction extends AbstractApplicationAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "exitapp")
     public ExitAction(Application app) {
         super(app);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
