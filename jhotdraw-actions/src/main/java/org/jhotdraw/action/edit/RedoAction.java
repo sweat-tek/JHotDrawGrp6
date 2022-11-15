@@ -54,11 +54,11 @@ public class RedoAction extends AbstractViewAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "redo")
     public RedoAction(Application app, View view) {
         super(app, view);
         labels.configureAction(this, ID);
     }
-    @FeatureEntryPoint(value = "redo")
 
     protected void updateEnabledState() {
         boolean isEnabled = false;
@@ -112,7 +112,6 @@ public class RedoAction extends AbstractViewAction {
             realAction.actionPerformed(e);
         }
     }
-
     private Action getRealRedoAction() {
         return (getActiveView() == null) ? null : getActiveView().getActionMap().get(ID);
     }

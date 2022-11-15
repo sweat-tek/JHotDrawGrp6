@@ -6,9 +6,9 @@
  * accompanying license terms.
  */
 package org.jhotdraw.app.action.file;
-
-import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Application;
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
+
 
 /**
  * Creates a new view.
@@ -36,6 +36,7 @@ public class NewWindowAction extends NewFileAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "newwindowaction")
     public NewWindowAction(Application app) {
         super(app, ID);
     }

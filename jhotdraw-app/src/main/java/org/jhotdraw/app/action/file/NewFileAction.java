@@ -33,6 +33,7 @@ import org.jhotdraw.util.*;
  * @author Werner Randelshofer
  * @version $Id$
  */
+
 public class NewFileAction extends AbstractApplicationAction {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +42,7 @@ public class NewFileAction extends AbstractApplicationAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "newfileaction")
     public NewFileAction(Application app) {
         this(app, ID);
     }
@@ -53,7 +55,6 @@ public class NewFileAction extends AbstractApplicationAction {
 
 
     @Override
-    @FeatureEntryPoint(value = "newfile")
     public void actionPerformed(ActionEvent evt) {
         Application app = getApplication();
         final View newView = app.createView();
