@@ -28,7 +28,6 @@ public class BringToFrontAction extends AbstractSelectedAction {
     /**
      * Creates a new instance.
      */
-    @FeatureEntryPoint("bringtofront")
     public BringToFrontAction(DrawingEditor editor) {
         super(editor);
         ResourceBundleUtil labels
@@ -38,6 +37,7 @@ public class BringToFrontAction extends AbstractSelectedAction {
     }
 
     @Override
+    @FeatureEntryPoint("bringtofront")
     public void actionPerformed(java.awt.event.ActionEvent e) {
         final DrawingView view = getView();
         final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());

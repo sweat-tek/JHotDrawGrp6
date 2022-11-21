@@ -28,7 +28,6 @@ public class SendToBackAction extends AbstractSelectedAction {
     /**
      * Creates a new instance.
      */
-    @FeatureEntryPoint("sendtoback")
     public SendToBackAction(DrawingEditor editor) {
         super(editor);
         ResourceBundleUtil labels
@@ -38,6 +37,7 @@ public class SendToBackAction extends AbstractSelectedAction {
     }
 
     @Override
+    @FeatureEntryPoint("sendtoback")
     public void actionPerformed(java.awt.event.ActionEvent e) {
         final DrawingView view = getView();
         final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());
