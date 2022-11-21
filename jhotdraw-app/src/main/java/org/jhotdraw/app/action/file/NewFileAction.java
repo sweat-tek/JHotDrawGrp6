@@ -9,7 +9,7 @@ package org.jhotdraw.app.action.file;
 
 import java.awt.event.*;
 
-import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
+
 import org.jhotdraw.api.app.Application;
 import org.jhotdraw.api.app.View;
 import org.jhotdraw.action.AbstractApplicationAction;
