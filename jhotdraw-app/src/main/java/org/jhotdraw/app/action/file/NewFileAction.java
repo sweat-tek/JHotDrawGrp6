@@ -42,7 +42,6 @@ public class NewFileAction extends AbstractApplicationAction {
     /**
      * Creates a new instance.
      */
-    @FeatureEntryPoint(value = "newfileaction")
     public NewFileAction(Application app) {
         this(app, ID);
     }

@@ -234,7 +234,6 @@ public class MDIApplication extends AbstractApplication {
     }
 
     @Override
-    @FeatureEntryPoint(value = "newwindow")
     protected ActionMap createViewActionMap(View v) {
         ActionMap intermediateMap = new ActionMap();
         intermediateMap.put(FocusWindowAction.ID, new FocusWindowAction(v));
@@ -545,6 +544,7 @@ public class MDIApplication extends AbstractApplication {
         return (m.getItemCount() > 0) ? m : null;
     }
 
+    @FeatureEntryPoint(value = "window")
     @Override
     public JMenu createWindowMenu(View view) {
         JMenu m;

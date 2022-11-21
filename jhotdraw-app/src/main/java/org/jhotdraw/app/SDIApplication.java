@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.app;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.MenuBuilder;
 import org.jhotdraw.api.app.ApplicationModel;
 import org.jhotdraw.api.app.View;
@@ -192,6 +193,7 @@ public class SDIApplication extends AbstractApplication {
     }
 
     @SuppressWarnings("unchecked")
+    @FeatureEntryPoint(value = "view")
     @Override
     public void show(final View view) {
         if (!view.isShowing()) {

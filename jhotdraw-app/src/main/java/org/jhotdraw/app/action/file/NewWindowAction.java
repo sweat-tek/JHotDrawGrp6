@@ -7,7 +7,7 @@
  */
 package org.jhotdraw.app.action.file;
 import org.jhotdraw.api.app.Application;
-import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
+// import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 
 
 /**
@@ -36,7 +36,6 @@ public class NewWindowAction extends NewFileAction {
     /**
      * Creates a new instance.
      */
-    @FeatureEntryPoint(value = "newwindowaction")
     public NewWindowAction(Application app) {
         super(app, ID);
     }
