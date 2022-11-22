@@ -17,9 +17,9 @@ jobs:
      with:
       servers: |
        [{
-        "id": "github-library-project-b",
-        "username": "${{ secrets.USER_PACKAGE_READ }}",
-        "password": "${{ secrets.TOKEN_PACKAGE_READ }}"
+        "id": "github",
+        "username": "${{ secrets.USERNAME }}",
+        "password": "${{ secrets.PASSWORD }}"
         }]
    - uses: actions/checkout@v3
    - name: Set up JDK 11
