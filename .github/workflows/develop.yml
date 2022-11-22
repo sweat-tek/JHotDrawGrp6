@@ -13,7 +13,8 @@ jobs:
    runs-on: windows-latest
 
    steps:
-   - uses: s4u/maven-settings-action@v2.3.0
+   - name: Setup authentication for mvn
+     uses: s4u/maven-settings-action@v2.3.0
      with:
       servers: |
        [{
