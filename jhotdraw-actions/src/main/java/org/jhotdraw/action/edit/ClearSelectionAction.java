@@ -56,23 +56,23 @@ public class ClearSelectionAction extends AbstractSelectionAction {
     /**
      * Creates a new instance which acts on the currently focused component.
      */
+    @FeatureEntryPoint(value = "ClearSelection")
     public ClearSelectionAction() {
         this(null);
     }
-    @FeatureEntryPoint(value = "select")
     /**
      * Creates a new instance which acts on the specified component.
      *
      * @param target The target of the action. Specify null for the currently
      * focused component.
      */
+    @FeatureEntryPoint(value = "ClearSelection")
     public ClearSelectionAction(JComponent target) {
         super(target);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.action.Labels");
         labels.configureAction(this, ID);
     }
-    @FeatureEntryPoint(value = "Select")
-
+    @FeatureEntryPoint(value = "ClearSelection")
     @Override
     public void actionPerformed(ActionEvent evt) {
         JComponent c = target;
@@ -92,7 +92,7 @@ public class ClearSelectionAction extends AbstractSelectionAction {
             }
         }
     }
-
+    @FeatureEntryPoint(value = "ClearSelection")
     @Override
     protected void updateEnabled() {
         if (target != null) {

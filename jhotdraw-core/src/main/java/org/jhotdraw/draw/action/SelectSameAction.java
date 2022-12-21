@@ -27,19 +27,19 @@ public class SelectSameAction extends AbstractSelectedAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "selectSame")
     public SelectSameAction(DrawingEditor editor) {
         super(editor);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
         labels.configureAction(this, ID);
         updateEnabledState();
     }
-    @FeatureEntryPoint(value = "select")
-
+    @FeatureEntryPoint(value = "selectSame")
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
         selectSame();
     }
-
+    @FeatureEntryPoint(value = "selectSame  ")
     public void selectSame() {
         HashSet<Class<?>> selectedClasses = new HashSet<>();
         for (Figure selected : getView().getSelectedFigures()) {

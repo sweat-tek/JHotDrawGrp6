@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw.event;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import java.util.*;
 import org.jhotdraw.draw.*;
@@ -37,6 +38,7 @@ public class FigureSelectionEvent extends java.util.EventObject {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "Select")
     public FigureSelectionEvent(DrawingView source, Set<Figure> oldValue, Set<Figure> newValue) {
         super(source);
         this.oldValue = oldValue;
