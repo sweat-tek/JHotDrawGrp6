@@ -70,6 +70,8 @@ public class SelectAllAction extends AbstractSelectionAction {
         labels.configureAction(this, ID);
     }
 
+    //5 point branching factor
+    //TODO decreasse branching factor
     @Override
     public void actionPerformed(ActionEvent evt) {
         JComponent c = target;

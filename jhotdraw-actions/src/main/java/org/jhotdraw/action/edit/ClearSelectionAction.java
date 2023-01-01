@@ -70,6 +70,8 @@ public class ClearSelectionAction extends AbstractSelectionAction {
         labels.configureAction(this, ID);
     }
 
+    //5 point branching factor
+    //TODO decrease branching factor
     @Override
     public void actionPerformed(ActionEvent evt) {
         JComponent c = target;

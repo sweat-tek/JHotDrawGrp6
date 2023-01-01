@@ -222,6 +222,7 @@ public class SelectionTool extends AbstractTool {
         tracker.draw(g);
     }
 
+    //TODO
     @Override
     public void mousePressed(MouseEvent evt) {
         if (getView() != null && getView().isEnabled()) {
