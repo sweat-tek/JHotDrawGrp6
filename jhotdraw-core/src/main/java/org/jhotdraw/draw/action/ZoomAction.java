@@ -69,4 +69,7 @@ public class ZoomAction extends AbstractDrawingViewAction {
             }
         });
     }
+    public double getScaleFactor() {
+        return scaleFactor;
+    }
 }
