@@ -18,8 +18,8 @@
  */
 package org.jhotdraw.draw;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addFocusListener;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -302,10 +302,6 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
     }
     private final EventHandler eventHandler = new EventHandler();
 
-    public AbstractDrawingView() {
-        addFocusListener(eventHandler);
-    }
-
     @Override
     public Drawing getDrawing() {
         return drawing;
@@ -540,6 +536,7 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
     /**
      * Adds a collection of figures to the current selection.
      */
+    @FeatureEntryPoint(value = "selection")
     @Override
     public void addToSelection(Collection<Figure> figures) {
         Set<Figure> oldSelection = new HashSet<>(selectedFigures);
@@ -604,6 +601,8 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
     /**
      * Selects all selectable figures.
      */
+    @FeatureEntryPoint(value = "select")
+
     @Override
     public void selectAll() {
         Set<Figure> oldSelection = new HashSet<>(selectedFigures);
@@ -622,6 +621,8 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
     /**
      * Clears the current selection.
      */
+    @FeatureEntryPoint(value = "select")
+
     @Override
     public void clearSelection() {
         if (getSelectionCount() > 0) {

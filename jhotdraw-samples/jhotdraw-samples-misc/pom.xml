@@ -8,7 +8,34 @@
 	</parent>
 	<artifactId>jhotdraw-samples-misc</artifactId>
 	<packaging>jar</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<argLine>
+						-javaagent:"C:\Users\Darkm\.m2\repository\org\aspectj\aspectjweaver\1.9.9\aspectjweaver-1.9.9.jar"
+						--add-opens java.base/java.lang=ALL-UNNAMED
+					</argLine>
+					<useSystemClassLoader>true</useSystemClassLoader>
+					<forkMode>always</forkMode>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
+		<dependency>
+			<groupId>dk.sdu.mmmi</groupId>
+			<artifactId>featuretracerlite</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.9</version>
+		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>jhotdraw-core</artifactId>
@@ -20,16 +47,6 @@
 			<version>7.3.4</version>
 		</dependency>
 		<dependency>
-			<groupId>dk.sdu.mmmi</groupId>
-			<artifactId>featuretracer</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.9</version>
-		</dependency>
-		<dependency>
 			<groupId>net.sourceforge.htmlunit</groupId>
 			<artifactId>htmlunit</artifactId>
 			<version>2.37.0</version>
@@ -39,5 +56,11 @@
 	  <artifactId>jhotdraw-app</artifactId>
 	  <version>${project.version}</version>
 	 </dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8.21</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

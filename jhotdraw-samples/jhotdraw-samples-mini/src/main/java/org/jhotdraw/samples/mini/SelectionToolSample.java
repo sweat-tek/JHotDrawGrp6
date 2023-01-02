@@ -46,6 +46,7 @@ public class SelectionToolSample {
     /**
      * Creates a new instance of SelectionToolSample
      */
+
     public SelectionToolSample() {
         LineFigure lf = new LineFigure();
         lf.setBounds(new Point2D.Double(40, 40), new Point2D.Double(200,
@@ -78,7 +79,6 @@ public class SelectionToolSample {
         //editor.setTool(new HandleTracker(view.findHandle(view.drawingToView(lf.getStartPoint()))));
         f.setVisible(true);
     }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

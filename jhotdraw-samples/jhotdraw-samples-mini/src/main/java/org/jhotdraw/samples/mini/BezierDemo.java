@@ -88,6 +88,7 @@ public class BezierDemo extends javax.swing.JPanel {
     }
     private MouseHandler handler = new MouseHandler();
 
+
     private class Canvas extends JPanel {
 
         private static final long serialVersionUID = 1L;

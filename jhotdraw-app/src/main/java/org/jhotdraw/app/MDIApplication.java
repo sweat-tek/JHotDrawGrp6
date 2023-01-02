@@ -42,6 +42,8 @@ import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.action.edit.AbstractFindAction;
 import org.jhotdraw.action.edit.ClearSelectionAction;
 import org.jhotdraw.action.edit.CopyAction;
@@ -542,6 +544,7 @@ public class MDIApplication extends AbstractApplication {
         return (m.getItemCount() > 0) ? m : null;
     }
 
+    @FeatureEntryPoint(value = "window")
     @Override
     public JMenu createWindowMenu(View view) {
         JMenu m;

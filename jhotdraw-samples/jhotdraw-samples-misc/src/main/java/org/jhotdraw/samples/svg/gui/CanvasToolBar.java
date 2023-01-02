@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.samples.svg.gui;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.gui.action.ButtonFactory;
 import org.jhotdraw.gui.plaf.palette.PaletteFormattedTextFieldUI;
 import org.jhotdraw.gui.plaf.palette.PaletteButtonUI;
@@ -52,7 +53,7 @@ public class CanvasToolBar extends AbstractToolBar {
         setName(labels.getString(getID() + ".toolbar"));
         setDisclosureStateCount(3);
     }
-
+    @FeatureEntryPoint(value = "createDisclosedComponent")
     @Override
     protected JComponent createDisclosedComponent(int state) {
         JPanel p = null;

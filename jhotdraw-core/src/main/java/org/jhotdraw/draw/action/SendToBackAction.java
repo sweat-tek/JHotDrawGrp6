@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw.action;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import java.util.*;
 import javax.swing.undo.*;
@@ -27,6 +28,7 @@ public class SendToBackAction extends AbstractSelectedAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint("sendtoback")
     public SendToBackAction(DrawingEditor editor) {
         super(editor);
         ResourceBundleUtil labels
@@ -36,6 +38,7 @@ public class SendToBackAction extends AbstractSelectedAction {
     }
 
     @Override
+    @FeatureEntryPoint("sendtoback")
     public void actionPerformed(java.awt.event.ActionEvent e) {
         final DrawingView view = getView();
         final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());
@@ -63,7 +66,7 @@ public class SendToBackAction extends AbstractSelectedAction {
             }
         });
     }
-
+    @FeatureEntryPoint("sendtoback")
     public static void sendToBack(DrawingView view, Collection<Figure> figures) {
         Drawing drawing = view.getDrawing();
         for (Figure figure : figures) { // XXX Shouldn't the figures be sorted here back to front?
