@@ -1704,13 +1704,29 @@ public class ButtonFactory {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 // String constants are interned
-                if ((evt.getPropertyName() == null && DrawingView.CONSTRAINER_VISIBLE_PROPERTY == null) || (evt.getPropertyName() != null && evt.getPropertyName().equals(DrawingView.CONSTRAINER_VISIBLE_PROPERTY))) {
+                if (constrainerIsNull(evt) || constrainerNotNull(evt)) {
                     toggleButton.setSelected(view.isConstrainerVisible());
                 }
             }
         });
         return toggleButton;
     }
+
+
+    public static boolean constrainerIsNull(PropertyChangeEvent evt) {
+        //evt.getPropertyName();
+        if (evt.getPropertyName() == null && DrawingView.CONSTRAINER_VISIBLE_PROPERTY == null) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean constrainerNotNull (PropertyChangeEvent evt) {
+        if (evt.getPropertyName() != null && evt.getPropertyName().equals((DrawingView.CONSTRAINER_VISIBLE_PROPERTY))) {
+            return true;
+        }
+        return false;
+    }
+
 
     public static JPopupButton createStrokeCapButton(DrawingEditor editor) {
         return createStrokeCapButton(editor,
