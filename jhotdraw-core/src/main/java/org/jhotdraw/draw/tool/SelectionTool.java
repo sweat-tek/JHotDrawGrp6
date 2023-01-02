@@ -223,6 +223,7 @@ public class SelectionTool extends AbstractTool {
     }
 
     //TODO
+    //long & 5+ point branch
     @Override
     public void mousePressed(MouseEvent evt) {
         if (getView() != null && getView().isEnabled()) {
@@ -331,6 +332,7 @@ public class SelectionTool extends AbstractTool {
      * Method to get a {@code SelectAreaTracker} which handles user interaction
      * for selecting an area on the drawing.
      */
+    //TODO possible refactor candidate
     protected SelectAreaTracker getSelectAreaTracker() {
         if (selectAreaTracker == null) {
             selectAreaTracker = new DefaultSelectAreaTracker();
