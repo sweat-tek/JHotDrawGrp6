@@ -383,4 +383,6 @@ public interface Drawing extends CompositeFigure, Serializable, DOMStorable {
      * Gets output formats for the Drawing in order of preferred formats.
      */
     List<OutputFormat> getOutputFormats();
+
+    void arrange(Figure figure, ArrangeLayer direction);
 }
