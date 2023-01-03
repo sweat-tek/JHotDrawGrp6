@@ -111,6 +111,19 @@ public class DefaultDrawing
     }
 
     @Override
+    public void arrange(Figure figure, ArrangeLayer layer) {
+        if (children.remove(figure)) {
+            if (layer == ArrangeLayer.FRONT) {
+                children.add(figure);
+            } else {
+                children.add(0, figure);
+            }
+            needsSorting = true;
+            fireAreaInvalidated(figure.getDrawingArea());
+        }
+    }
+
+    @Override
     public Figure findFigure(Point2D.Double p) {
         for (Figure f : getFiguresFrontToBack()) {
             if (f.isVisible() && f.contains(p)) {
