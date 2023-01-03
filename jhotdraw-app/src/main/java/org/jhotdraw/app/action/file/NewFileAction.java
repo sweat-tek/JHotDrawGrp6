@@ -8,6 +8,8 @@
 package org.jhotdraw.app.action.file;
 
 import java.awt.event.*;
+
+
 import org.jhotdraw.api.app.Application;
 import org.jhotdraw.api.app.View;
 import org.jhotdraw.action.AbstractApplicationAction;
@@ -31,6 +33,7 @@ import org.jhotdraw.util.*;
  * @author Werner Randelshofer
  * @version $Id$
  */
+
 public class NewFileAction extends AbstractApplicationAction {
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +51,7 @@ public class NewFileAction extends AbstractApplicationAction {
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
         labels.configureAction(this, id);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent evt) {

@@ -39,6 +39,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.plaf.ColorChooserUI;
 import javax.swing.text.StyledEditorKit;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.action.edit.CopyAction;
 import org.jhotdraw.action.edit.CutAction;
 import org.jhotdraw.action.edit.DuplicateAction;
@@ -1648,11 +1650,32 @@ public class ButtonFactory {
         toggleButton = new JToggleButton();
         labels.configureToolBarButton(toggleButton, "view.toggleGrid");
         toggleButton.setFocusable(false);
+
+        toggleButton.addItemListener(new ItemListener() {
+            @Override
+            @FeatureEntryPoint(value = "Grid Button listener 1")
+            public void itemStateChanged(ItemEvent event) {
+                view.setConstrainerVisible(toggleButton.isSelected());
+                //view.getComponent().repaint();
+            }
+        });
+        view.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            @FeatureEntryPoint(value="Grid listener change")
+            public void propertyChange(PropertyChangeEvent evt) {
+                // String constants are interned
+                if ((evt.getPropertyName() == null && DrawingView.CONSTRAINER_VISIBLE_PROPERTY == null) || (evt.getPropertyName() != null && evt.getPropertyName().equals(DrawingView.CONSTRAINER_VISIBLE_PROPERTY))) {
+                    toggleButton.setSelected(view.isConstrainerVisible());
+                }
+            }
+        });
+=======
         GridItemListener gridItemListener = new GridItemListener(toggleButton, view);
         toggleButton.addItemListener(gridItemListener);
 
         GridListener gridListener = new GridListener(toggleButton, view);
         view.addPropertyChangeListener(gridListener);
+
 
         return toggleButton;
     }

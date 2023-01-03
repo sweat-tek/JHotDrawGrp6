@@ -9,6 +9,8 @@ package org.jhotdraw.action;
 
 import java.beans.*;
 import javax.swing.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Application;
 import org.jhotdraw.api.app.Disposable;
 import org.jhotdraw.beans.WeakPropertyChangeListener;
@@ -120,6 +122,7 @@ public abstract class AbstractApplicationAction extends AbstractAction implement
     }
 
     @Override
+    @FeatureEntryPoint(value = "exitapp")
     public final void dispose() {
         if (app != null) {
             uninstallApplicationListeners(app);

@@ -8,6 +8,7 @@
  */
 package org.jhotdraw.app;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.View;
 import org.jhotdraw.api.app.ApplicationModel;
 import org.jhotdraw.api.app.Application;
@@ -116,6 +117,7 @@ public abstract class AbstractApplicationModel extends AbstractBean
         return viewClass;
     }
 
+    @FeatureEntryPoint(value = "view")
     @Override
     public View createView() {
         try {

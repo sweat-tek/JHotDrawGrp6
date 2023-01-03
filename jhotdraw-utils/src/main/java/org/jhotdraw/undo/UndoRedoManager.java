@@ -12,6 +12,8 @@ import java.beans.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.undo.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.util.*;
 
 /**
@@ -133,6 +135,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
     /**
      * Creates new UndoRedoManager
      */
+    @FeatureEntryPoint(value = "undo")
     public UndoRedoManager() {
         getLabels();
         undoAction = new UndoAction();
@@ -221,12 +224,17 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * and of the RedoAction.
      */
     private void updateActions() {
-        String label;
+
         if (DEBUG) {
             System.out.println("UndoRedoManager@" + hashCode() + ".updateActions "
                     + editToBeUndone()
                     + " canUndo=" + canUndo() + " canRedo=" + canRedo());
         }
+
+    }
+
+    private void canUndoRedoActions(){
+        String label;
         if (canUndo()) {
             undoAction.setEnabled(true);
             label = getUndoPresentationName();
@@ -247,11 +255,13 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         redoAction.putValue(Action.SHORT_DESCRIPTION, label);
     }
 
+
     /**
      * Undoes the last edit event.
      * The UndoRedoManager ignores all incoming UndoableEdit events,
      * while undo is in progress.
      */
+    @FeatureEntryPoint(value = "undo")
     @Override
     public void undo()
             throws CannotUndoException {
@@ -261,6 +271,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         } finally {
             undoOrRedoInProgress = false;
             updateActions();
+            canUndoRedoActions();
         }
     }
 
@@ -269,6 +280,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * The UndoRedoManager ignores all incoming UndoableEdit events,
      * while redo is in progress.
      */
+    @FeatureEntryPoint(value = "redo")
     @Override
     public void redo()
             throws CannotUndoException {
@@ -278,6 +290,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         } finally {
             undoOrRedoInProgress = false;
             updateActions();
+            canUndoRedoActions();
         }
     }
 
@@ -295,6 +308,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         } finally {
             undoOrRedoInProgress = false;
             updateActions();
+            canUndoRedoActions();
         }
     }
 

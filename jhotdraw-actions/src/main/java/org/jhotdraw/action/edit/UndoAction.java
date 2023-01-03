@@ -10,6 +10,8 @@ package org.jhotdraw.action.edit;
 import java.awt.event.*;
 import java.beans.*;
 import javax.swing.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.action.AbstractViewAction;
 import org.jhotdraw.api.app.Application;
 import org.jhotdraw.api.app.View;
@@ -40,7 +42,7 @@ public class UndoAction extends AbstractViewAction {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             String name = evt.getPropertyName();
-            if ((name == null && AbstractAction.NAME == null) || (name != null && name.equals(AbstractAction.NAME))) {
+            if (name != null && name.equals(AbstractAction.NAME)) {
                 putValue(AbstractAction.NAME, evt.getNewValue());
             } else if ("enabled".equals(name)) {
                 updateEnabledState();
@@ -51,10 +53,12 @@ public class UndoAction extends AbstractViewAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "undo")
     public UndoAction(Application app, View view) {
         super(app, view);
         labels.configureAction(this, ID);
     }
+
 
     protected void updateEnabledState() {
         boolean isEnabled = false;
@@ -108,7 +112,6 @@ public class UndoAction extends AbstractViewAction {
             realUndoAction.actionPerformed(e);
         }
     }
-
     private Action getRealUndoAction() {
         return (getActiveView() == null) ? null : getActiveView().getActionMap().get(ID);
     }

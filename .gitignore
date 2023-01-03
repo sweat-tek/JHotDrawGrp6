@@ -7,4 +7,8 @@ target
 nb-configuration.xml
 *.*~
 .idea/
+
+JHotDrawGrp6/jhotdraw-samples/jhotdraw-samples-misc/FeatureTraces
+=======
 *.ftf
+

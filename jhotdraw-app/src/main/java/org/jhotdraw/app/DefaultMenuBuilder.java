@@ -8,6 +8,7 @@
  */
 package org.jhotdraw.app;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.MenuBuilder;
 import org.jhotdraw.api.app.View;
 import org.jhotdraw.api.app.Application;
@@ -76,6 +77,7 @@ public class DefaultMenuBuilder implements MenuBuilder {
      * <li>{@link ExitAction}</li>
      * </ul>
      */
+    @FeatureEntryPoint(value = "Exit")
     @Override
     public void addExitItems(JMenu m, Application app, View v) {
         ActionMap am = app.getActionMap(v);
@@ -106,6 +108,7 @@ public class DefaultMenuBuilder implements MenuBuilder {
      * <li>{@link NewWindowAction}</li>
      * </ul>
      */
+
     @Override
     public void addNewWindowItems(JMenu m, Application app, View v) {
         ActionMap am = app.getActionMap(v);

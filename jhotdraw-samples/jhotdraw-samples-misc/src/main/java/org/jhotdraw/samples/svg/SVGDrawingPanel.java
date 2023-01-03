@@ -194,6 +194,8 @@ public class SVGDrawingPanel extends JPanel implements Disposable {
      * Creates a new Drawing object which can be used with this
      * {@code SVGDrawingPanel}.
      */
+
+
     public Drawing createDrawing() {
         Drawing drawing = new QuadTreeDrawing();
         LinkedList<InputFormat> inputFormats = new LinkedList<InputFormat>();

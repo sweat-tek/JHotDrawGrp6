@@ -7,6 +7,12 @@
  */
 package org.jhotdraw.draw.action;
 
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
+import org.jhotdraw.draw.figure.Figure;
+import java.util.*;
+import javax.swing.undo.*;
+
 import org.jhotdraw.draw.*;
 import org.jhotdraw.util.ResourceBundleUtil;
 import org.jhotdraw.draw.ArrangeLayer;
@@ -30,5 +36,44 @@ public class SendToBackAction extends ArrangeAction {
         ResourceBundleUtil labels
                 = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
         labels.configureAction(this, ID);
+
+        updateEnabledState();
+    }
+
+    @Override
+    @FeatureEntryPoint("sendtoback")
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+        final DrawingView view = getView();
+        final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());
+        sendToBack(view, figures);
+        fireUndoableEditHappened(new AbstractUndoableEdit() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public String getPresentationName() {
+                ResourceBundleUtil labels
+                        = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                return labels.getTextProperty(ID);
+            }
+
+            @Override
+            public void redo() throws CannotRedoException {
+                super.redo();
+                SendToBackAction.sendToBack(view, figures);
+            }
+
+            @Override
+            public void undo() throws CannotUndoException {
+                super.undo();
+                BringToFrontAction.bringToFront(view, figures);
+            }
+        });
+    }
+    public static void sendToBack(DrawingView view, Collection<Figure> figures) {
+        Drawing drawing = view.getDrawing();
+        for (Figure figure : figures) { // XXX Shouldn't the figures be sorted here back to front?
+            drawing.sendToBack(figure);
+        }
+
     }
 }

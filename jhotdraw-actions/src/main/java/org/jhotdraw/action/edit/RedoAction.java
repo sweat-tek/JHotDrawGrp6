@@ -10,6 +10,8 @@ package org.jhotdraw.action.edit;
 import java.awt.event.*;
 import java.beans.*;
 import javax.swing.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.action.AbstractViewAction;
 import org.jhotdraw.api.app.Application;
 import org.jhotdraw.api.app.View;
@@ -41,7 +43,7 @@ public class RedoAction extends AbstractViewAction {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             String name = evt.getPropertyName();
-            if ((name == null && AbstractAction.NAME == null) || (name != null && name.equals(AbstractAction.NAME))) {
+            if (name != null && name.equals(AbstractAction.NAME)) {
                 putValue(AbstractAction.NAME, evt.getNewValue());
             } else if ("enabled".equals(name)) {
                 updateEnabledState();
@@ -52,6 +54,7 @@ public class RedoAction extends AbstractViewAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint(value = "redo")
     public RedoAction(Application app, View view) {
         super(app, view);
         labels.configureAction(this, ID);
@@ -109,7 +112,6 @@ public class RedoAction extends AbstractViewAction {
             realAction.actionPerformed(e);
         }
     }
-
     private Action getRealRedoAction() {
         return (getActiveView() == null) ? null : getActiveView().getActionMap().get(ID);
     }

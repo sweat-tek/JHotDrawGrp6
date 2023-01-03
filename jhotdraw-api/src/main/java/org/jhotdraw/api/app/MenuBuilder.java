@@ -8,6 +8,8 @@
  */
 package org.jhotdraw.api.app;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
+
 import java.util.List;
 import javax.swing.JMenu;
 
@@ -107,6 +109,7 @@ public interface MenuBuilder {
      * @param v A view the menu is used exclusively for a specific view, null
      * if the menu is shared by all views.
      */
+    @FeatureEntryPoint(value = "Window")
     void addNewWindowItems(JMenu m, Application app, View v);
 
     /**
@@ -159,6 +162,7 @@ public interface MenuBuilder {
      * @param v A view the menu is used exclusively for a specific view, null
      * if the menu is shared by all views.
      */
+    @FeatureEntryPoint(value = "Close")
     void addCloseFileItems(JMenu m, Application app, View v);
 
     /**
