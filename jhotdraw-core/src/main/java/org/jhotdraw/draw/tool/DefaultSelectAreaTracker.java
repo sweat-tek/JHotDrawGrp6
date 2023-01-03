@@ -110,12 +110,12 @@ public class DefaultSelectAreaTracker extends AbstractTool implements SelectArea
         if (view == null || editor.getActiveView() != view) {
             clearHoverHandles();
         } else {
-            findFigures(view, point);
+            Figure figure = null;
+            findFigures(view, point, figure);
         }
     }
 
-    protected void findFigures(DrawingView view, Point point){
-        Figure figure = null;
+    protected void findFigures(DrawingView view, Point point, Figure figure){
         Point2D.Double p = view.viewToDrawing(point);
         for (Figure f : view.getSelectedFigures()) {
             if (f.contains(p)) {

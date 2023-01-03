@@ -77,8 +77,12 @@ public class SelectAllAction extends AbstractSelectionAction {
                 instanceof JComponent)) {
             c = (JComponent) KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
         }
-        if (c instanceof EditableComponent) {((EditableComponent) c).selectAll();}
-        if (c instanceof JTextComponent) {((JTextComponent) c).selectAll();}
+        if (c instanceof EditableComponent) {
+            ((EditableComponent) c).selectAll();
+        }
+        if (c instanceof JTextComponent) {
+            ((JTextComponent) c).selectAll();
+        }
         c.getToolkit().beep();
     }
 

@@ -77,7 +77,9 @@ public class ClearSelectionAction extends AbstractSelectionAction {
                 instanceof JComponent)) {
             c = (JComponent) KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
         }
-        if (c instanceof EditableComponent) {((EditableComponent) c).clearSelection();}
+        if (c instanceof EditableComponent) {
+            ((EditableComponent) c).clearSelection();
+        }
         if (c instanceof JTextComponent) {
                 JTextComponent tc = ((JTextComponent) c);
                 tc.select(tc.getSelectionStart(), tc.getSelectionStart());
