@@ -70,7 +70,6 @@ public class SelectionTool extends AbstractTool {
      */
     private DragTracker dragTracker;
 
-    //TODO extract class
     private class TrackerHandler extends ToolAdapter {
 
         @Override
@@ -287,24 +286,23 @@ public class SelectionTool extends AbstractTool {
                 }
             }
             if (newTracker != null) {
+                removeTracker(newTracker);
                 setTracker(newTracker);
             }
             tracker.mousePressed(evt);
         }
     }
 
-    //TODO code fragment
-    //create two new methods each for removing the tracker and creating the tracker
     protected void setTracker(Tool newTracker) {
-        if (tracker != null) {
-            tracker.deactivate(getEditor());
-            tracker.removeToolListener(trackerHandler);
-        }
         tracker = newTracker;
-        if (tracker != null) {
-            tracker.activate(getEditor());
-            tracker.addToolListener(trackerHandler);
-        }
+        tracker.activate(getEditor());
+        tracker.addToolListener(trackerHandler);
+    }
+
+    protected void removeTracker(Tool newTracker){
+        tracker = newTracker;
+        tracker.deactivate(getEditor());
+        tracker.removeToolListener(trackerHandler);
     }
 
     /**
