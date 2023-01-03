@@ -6,7 +6,7 @@ public class BtfaTest {
     @Test
     public void test() {
         BringToFrontAction btfa = new BringToFrontAction(null);
-        assert (btfa.ID == "edit.bringToFront");
+        assert (btfa.ID.equals("edit.bringToFront"));
         assert (btfa.direction == ArrangeLayer.FRONT);
     }
 
