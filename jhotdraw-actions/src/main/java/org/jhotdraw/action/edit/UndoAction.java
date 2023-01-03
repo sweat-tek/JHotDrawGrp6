@@ -42,7 +42,7 @@ public class UndoAction extends AbstractViewAction {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             String name = evt.getPropertyName();
-            if ((name == null && AbstractAction.NAME == null) || (name != null && name.equals(AbstractAction.NAME))) {
+            if (name != null && name.equals(AbstractAction.NAME)) {
                 putValue(AbstractAction.NAME, evt.getNewValue());
             } else if ("enabled".equals(name)) {
                 updateEnabledState();

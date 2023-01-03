@@ -224,12 +224,17 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * and of the RedoAction.
      */
     private void updateActions() {
-        String label;
+
         if (DEBUG) {
             System.out.println("UndoRedoManager@" + hashCode() + ".updateActions "
                     + editToBeUndone()
                     + " canUndo=" + canUndo() + " canRedo=" + canRedo());
         }
+
+    }
+
+    private void canUndoRedoActions(){
+        String label;
         if (canUndo()) {
             undoAction.setEnabled(true);
             label = getUndoPresentationName();
@@ -250,6 +255,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         redoAction.putValue(Action.SHORT_DESCRIPTION, label);
     }
 
+
     /**
      * Undoes the last edit event.
      * The UndoRedoManager ignores all incoming UndoableEdit events,
@@ -265,6 +271,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         } finally {
             undoOrRedoInProgress = false;
             updateActions();
+            canUndoRedoActions();
         }
     }
 
@@ -283,6 +290,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         } finally {
             undoOrRedoInProgress = false;
             updateActions();
+            canUndoRedoActions();
         }
     }
 
@@ -300,6 +308,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         } finally {
             undoOrRedoInProgress = false;
             updateActions();
+            canUndoRedoActions();
         }
     }
 
