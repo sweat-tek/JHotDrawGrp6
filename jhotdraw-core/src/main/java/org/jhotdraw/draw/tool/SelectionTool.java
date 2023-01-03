@@ -222,6 +222,8 @@ public class SelectionTool extends AbstractTool {
         tracker.draw(g);
     }
 
+    //TODO
+    //long & 5+ point branch
     @Override
     public void mousePressed(MouseEvent evt) {
         if (getView() != null && getView().isEnabled()) {
@@ -284,6 +286,7 @@ public class SelectionTool extends AbstractTool {
                 }
             }
             if (newTracker != null) {
+                removeTracker(newTracker);
                 setTracker(newTracker);
             }
             tracker.mousePressed(evt);
@@ -291,15 +294,15 @@ public class SelectionTool extends AbstractTool {
     }
 
     protected void setTracker(Tool newTracker) {
-        if (tracker != null) {
-            tracker.deactivate(getEditor());
-            tracker.removeToolListener(trackerHandler);
-        }
         tracker = newTracker;
-        if (tracker != null) {
-            tracker.activate(getEditor());
-            tracker.addToolListener(trackerHandler);
-        }
+        tracker.activate(getEditor());
+        tracker.addToolListener(trackerHandler);
+    }
+
+    protected void removeTracker(Tool newTracker){
+        tracker = newTracker;
+        tracker.deactivate(getEditor());
+        tracker.removeToolListener(trackerHandler);
     }
 
     /**

@@ -238,12 +238,17 @@ public class GridConstrainer extends AbstractConstrainer {
     public Rectangle2D.Double constrainRectangle(Rectangle2D.Double r, Figure... figure) {
         Point2D.Double p0 = constrainPoint(new Point2D.Double(r.x, r.y), figure);
         Point2D.Double p1 = constrainPoint(new Point2D.Double(r.x + r.width, r.y + r.height), figure);
-        if (Math.abs(p0.x - r.x) < Math.abs(p1.x - r.x - r.width)) {
+        double dx = Math.abs(p0.x - r.x);
+        double remainingWidth = Math.abs(p1.x - r.x - r.width);
+
+        if (dx < remainingWidth) {
             r.x = p0.x;
         } else {
             r.x = p1.x - r.width;
         }
-        if (Math.abs(p0.y - r.y) < Math.abs(p1.y - r.y - r.height)) {
+        double dy = Math.abs(p0.y - r.y);
+        double remainingHeight = p1.y - r.y - r.height;
+        if (dy < remainingHeight) {
             r.y = p0.y;
         } else {
             r.y = p1.y - r.height;
@@ -370,58 +375,70 @@ public class GridConstrainer extends AbstractConstrainer {
     @FeatureEntryPoint(value="draw grid")
     @Override
     public void draw(Graphics2D g, DrawingView view) {
-        if (isVisible) {
-            AffineTransform t = view.getDrawingToViewTransform();
-            Rectangle viewBounds = g.getClipBounds();
-            Rectangle2D.Double bounds = view.viewToDrawing(viewBounds);
-            Point2D.Double origin = constrainPoint(new Point2D.Double(bounds.x, bounds.y));
-            Point2D.Double point = new Point2D.Double();
-            Point2D.Double viewPoint = new Point2D.Double();
-            // vertical grid lines are only drawn, if they are at least two
-            // pixels apart on the view coordinate system.
-            if (width * view.getScaleFactor() > 2) {
-                g.setColor(minorColor);
-                for (int i = (int) (origin.x / width), m = (int) ((origin.x + bounds.width) / width) + 1; i <= m; i++) {
-                    g.setColor((i % majorGridSpacing == 0) ? majorColor : minorColor);
-                    point.x = width * i;
-                    t.transform(point, viewPoint);
-                    g.drawLine((int) viewPoint.x, viewBounds.y,
-                            (int) viewPoint.x, viewBounds.y + viewBounds.height);
-                }
-            } else if (width * majorGridSpacing * view.getScaleFactor() > 2) {
-                g.setColor(majorColor);
-                for (int i = (int) (origin.x / width), m = (int) ((origin.x + bounds.width) / width) + 1; i <= m; i++) {
-                    if (i % majorGridSpacing == 0) {
-                        point.x = width * i;
-                        t.transform(point, viewPoint);
-                        g.drawLine((int) viewPoint.x, viewBounds.y,
-                                (int) viewPoint.x, viewBounds.y + viewBounds.height);
-                    }
-                }
+        if (!isVisible) {
+            return;
+        }
+        AffineTransform t = view.getDrawingToViewTransform();
+        Rectangle viewBounds = g.getClipBounds();
+        Rectangle2D.Double bounds = view.viewToDrawing(viewBounds);
+        // vertical grid lines are only drawn, if they are at least two
+        // pixels apart on the view coordinate system.
+        verticalLine(g, view, t, viewBounds, bounds);
+        // horizontal grid lines are only drawn, if they are at least two
+        // pixels apart on the view coordinate system.
+        horizontalLine(g, view, t, viewBounds, bounds);
+    }
+
+    private void horizontalLine(Graphics2D g, DrawingView view, AffineTransform t, Rectangle viewBounds, Rectangle2D.Double bounds) {
+        Point2D.Double origin = constrainPoint(new Point2D.Double(bounds.x, bounds.y));
+        Point2D.Double point = new Point2D.Double();
+        Point2D.Double viewPoint = new Point2D.Double();
+        if (height * view.getScaleFactor() > 2) {
+            for (int i = (int) (origin.y / height), m = (int) ((origin.y + bounds.height) / height) + 1; i <= m; i++) {
+                g.setColor((i % majorGridSpacing == 0) ? majorColor : minorColor);
+                drawHorizontalLine(g, t, viewBounds, point, viewPoint, i);
             }
-            // horizontal grid lines are only drawn, if they are at least two
-            // pixels apart on the view coordinate system.
-            if (height * view.getScaleFactor() > 2) {
-                g.setColor(minorColor);
-                for (int i = (int) (origin.y / height), m = (int) ((origin.y + bounds.height) / height) + 1; i <= m; i++) {
-                    g.setColor((i % majorGridSpacing == 0) ? majorColor : minorColor);
-                    point.y = height * i;
-                    t.transform(point, viewPoint);
-                    g.drawLine(viewBounds.x, (int) viewPoint.y,
-                            viewBounds.x + viewBounds.width, (int) viewPoint.y);
-                }
-            } else if (height * majorGridSpacing * view.getScaleFactor() > 2) {
-                g.setColor(majorColor);
-                for (int i = (int) (origin.y / height), m = (int) ((origin.y + bounds.height) / height) + 1; i <= m; i++) {
-                    if (i % majorGridSpacing == 0) {
-                        point.y = height * i;
-                        t.transform(point, viewPoint);
-                        g.drawLine(viewBounds.x, (int) viewPoint.y,
-                                viewBounds.x + viewBounds.width, (int) viewPoint.y);
-                    }
+        } else if (height * majorGridSpacing * view.getScaleFactor() > 2) {
+            g.setColor(majorColor);
+            for (int i = (int) (origin.y / height), m = (int) ((origin.y + bounds.height) / height) + 1; i <= m; i++) {
+                if (i % majorGridSpacing == 0) {
+                    drawHorizontalLine(g, t, viewBounds, point, viewPoint, i);
                 }
             }
         }
+    }
+
+    private void drawHorizontalLine(Graphics2D g, AffineTransform t, Rectangle viewBounds, Point2D.Double point, Point2D.Double viewPoint, int i) {
+        point.y = height * i;
+        t.transform(point, viewPoint);
+        g.drawLine(viewBounds.x, (int) viewPoint.y,
+                viewBounds.x + viewBounds.width, (int) viewPoint.y);
+    }
+
+    private void verticalLine(Graphics2D g, DrawingView view, AffineTransform t, Rectangle viewBounds, Rectangle2D.Double bounds) {
+        Point2D.Double origin = constrainPoint(new Point2D.Double(bounds.x, bounds.y));
+        Point2D.Double point = new Point2D.Double();
+        Point2D.Double viewPoint = new Point2D.Double();
+        if (width * view.getScaleFactor() > 2) {
+            for (int i = (int) (origin.x / width), m = (int) ((origin.x + bounds.width) / width) + 1; i <= m; i++) {
+                g.setColor((i % majorGridSpacing == 0) ? majorColor : minorColor);
+                drawVerticalLine(g, t, viewBounds, point, viewPoint, i);
+            }
+        } else if (width * majorGridSpacing * view.getScaleFactor() > 2) {
+            g.setColor(majorColor);
+            for (int i = (int) (origin.x / width), m = (int) ((origin.x + bounds.width) / width) + 1; i <= m; i++) {
+                if (i % majorGridSpacing == 0) {
+                    drawVerticalLine(g, t, viewBounds, point, viewPoint, i);
+                }
+            }
+        }
+    }
+
+    private void drawVerticalLine(Graphics2D g, AffineTransform t, Rectangle viewBounds, Point2D.Double point, Point2D.Double viewPoint, int i) {
+        point.x = width * i;
+        t.transform(point, viewPoint);
+        g.drawLine((int) viewPoint.x, viewBounds.y,
+                (int) viewPoint.x, viewBounds.y + viewBounds.height);
     }
 
     @Override

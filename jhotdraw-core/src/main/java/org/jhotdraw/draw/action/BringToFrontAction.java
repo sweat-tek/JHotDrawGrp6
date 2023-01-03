@@ -11,8 +11,10 @@ import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import java.util.*;
 import javax.swing.undo.*;
+
 import org.jhotdraw.draw.*;
 import org.jhotdraw.util.ResourceBundleUtil;
+import org.jhotdraw.draw.ArrangeLayer;
 
 /**
  * ToFrontAction.
@@ -20,7 +22,7 @@ import org.jhotdraw.util.ResourceBundleUtil;
  * @author Werner Randelshofer
  * @version $Id$
  */
-public class BringToFrontAction extends AbstractSelectedAction {
+public class BringToFrontAction extends ArrangeAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.bringToFront";
@@ -29,10 +31,11 @@ public class BringToFrontAction extends AbstractSelectedAction {
      * Creates a new instance.
      */
     public BringToFrontAction(DrawingEditor editor) {
-        super(editor);
+        super(editor, ID, ArrangeLayer.FRONT);
         ResourceBundleUtil labels
                 = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
         labels.configureAction(this, ID);
+
         updateEnabledState();
     }
 
@@ -70,5 +73,6 @@ public class BringToFrontAction extends AbstractSelectedAction {
         for (Figure figure : drawing.sort(figures)) {
             drawing.bringToFront(figure);
         }
+
     }
 }

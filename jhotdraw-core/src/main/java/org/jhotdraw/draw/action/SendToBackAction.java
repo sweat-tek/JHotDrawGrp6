@@ -7,12 +7,15 @@
  */
 package org.jhotdraw.draw.action;
 
+
 import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import java.util.*;
 import javax.swing.undo.*;
+
 import org.jhotdraw.draw.*;
 import org.jhotdraw.util.ResourceBundleUtil;
+import org.jhotdraw.draw.ArrangeLayer;
 
 /**
  * SendToBackAction.
@@ -20,7 +23,7 @@ import org.jhotdraw.util.ResourceBundleUtil;
  * @author Werner Randelshofer
  * @version $Id$
  */
-public class SendToBackAction extends AbstractSelectedAction {
+public class SendToBackAction extends ArrangeAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.sendToBack";
@@ -29,10 +32,11 @@ public class SendToBackAction extends AbstractSelectedAction {
      * Creates a new instance.
      */
     public SendToBackAction(DrawingEditor editor) {
-        super(editor);
+        super(editor, ID, ArrangeLayer.BACK);
         ResourceBundleUtil labels
                 = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
         labels.configureAction(this, ID);
+
         updateEnabledState();
     }
 
@@ -70,5 +74,6 @@ public class SendToBackAction extends AbstractSelectedAction {
         for (Figure figure : figures) { // XXX Shouldn't the figures be sorted here back to front?
             drawing.sendToBack(figure);
         }
+
     }
 }

@@ -94,7 +94,6 @@ import org.jhotdraw.draw.action.SendToBackAction;
 import org.jhotdraw.draw.action.StrokeIcon;
 import org.jhotdraw.draw.action.UngroupAction;
 import org.jhotdraw.draw.action.ZoomAction;
-import org.jhotdraw.draw.action.ZoomEditorAction;
 import org.jhotdraw.draw.decoration.ArrowTip;
 import org.jhotdraw.draw.decoration.LineDecoration;
 import org.jhotdraw.draw.event.SelectionComponentRepainter;
@@ -107,6 +106,9 @@ import org.jhotdraw.geom.DoubleStroke;
 import org.jhotdraw.gui.JComponentPopup;
 import org.jhotdraw.gui.JFontChooser;
 import org.jhotdraw.gui.JPopupButton;
+import org.jhotdraw.gui.action.buttonlisteners.GridItemListener;
+import org.jhotdraw.gui.action.buttonlisteners.GridListener;
+import org.jhotdraw.gui.action.buttonlisteners.ZoomListener;
 import org.jhotdraw.util.ActionUtil;
 import org.jhotdraw.util.Images;
 import org.jhotdraw.util.Methods;
@@ -425,50 +427,9 @@ public class ButtonFactory {
         return t;
     }
 
-    public static void addZoomButtonsTo(JToolBar bar, final DrawingEditor editor) {
-        bar.add(createZoomButton(editor));
-    }
 
-    public static AbstractButton createZoomButton(final DrawingEditor editor) {
-        ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
-        final JPopupButton zoomPopupButton = new JPopupButton();
-        labels.configureToolBarButton(zoomPopupButton, "view.zoomFactor");
-        zoomPopupButton.setFocusable(false);
-        if (editor.getDrawingViews().size() == 0) {
-            zoomPopupButton.setText("100 %");
-        } else {
-            zoomPopupButton.setText((int) (editor.getDrawingViews().iterator().next().getScaleFactor() * 100) + " %");
-        }
-        editor.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                // String constants are interned
-                if ((evt.getPropertyName() == null && DrawingEditor.ACTIVE_VIEW_PROPERTY == null) || (evt.getPropertyName() != null && evt.getPropertyName().equals(DrawingEditor.ACTIVE_VIEW_PROPERTY))) {
-                    if (evt.getNewValue() == null) {
-                        zoomPopupButton.setText("100 %");
-                    } else {
-                        zoomPopupButton.setText((int) (editor.getActiveView().getScaleFactor() * 100) + " %");
-                    }
-                }
-            }
-        });
-        double[] factors = {16, 8, 5, 4, 3, 2, 1.5, 1.25, 1, 0.75, 0.5, 0.25, 0.10};
-        for (int i = 0; i < factors.length; i++) {
-            zoomPopupButton.add(
-                    new ZoomEditorAction(editor, factors[i], zoomPopupButton) {
-                private static final long serialVersionUID = 1L;
 
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent e) {
-                    super.actionPerformed(e);
-                    zoomPopupButton.setText((int) (editor.getActiveView().getScaleFactor() * 100) + " %");
-                }
-            });
-        }
-        //zoomPopupButton.setPreferredSize(new Dimension(16,16));
-        zoomPopupButton.setFocusable(false);
-        return zoomPopupButton;
-    }
+
 
     public static AbstractButton createZoomButton(DrawingView view) {
         return createZoomButton(view, new double[]{
@@ -482,26 +443,20 @@ public class ButtonFactory {
         labels.configureToolBarButton(zoomPopupButton, "view.zoomFactor");
         zoomPopupButton.setFocusable(false);
         zoomPopupButton.setText((int) (view.getScaleFactor() * 100) + " %");
-        view.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                // String constants are interned
-                if ("scaleFactor".equals(evt.getPropertyName())) {
-                    zoomPopupButton.setText((int) (view.getScaleFactor() * 100) + " %");
-                }
-            }
-        });
-        for (int i = 0; i < factors.length; i++) {
-            zoomPopupButton.add(
-                    new ZoomAction(view, factors[i], zoomPopupButton) {
-                private static final long serialVersionUID = 1L;
+        ZoomListener listener = new ZoomListener(zoomPopupButton, view);
+        view.addPropertyChangeListener(listener);
 
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent e) {
-                    super.actionPerformed(e);
-                    zoomPopupButton.setText((int) (view.getScaleFactor() * 100) + " %");
-                }
-            });
+        for (double factor : factors) {
+            zoomPopupButton.add(
+                    new ZoomAction(view, factor, zoomPopupButton) {
+                        private static final long serialVersionUID = 1L;
+
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                            super.actionPerformed(e);
+                            zoomPopupButton.setText((int) (view.getScaleFactor() * 100) + " %");
+                        }
+                    });
         }
         //zoomPopupButton.setPreferredSize(new Dimension(16,16));
         zoomPopupButton.setFocusable(false);
@@ -1695,6 +1650,7 @@ public class ButtonFactory {
         toggleButton = new JToggleButton();
         labels.configureToolBarButton(toggleButton, "view.toggleGrid");
         toggleButton.setFocusable(false);
+
         toggleButton.addItemListener(new ItemListener() {
             @Override
             @FeatureEntryPoint(value = "Grid Button listener 1")
@@ -1713,8 +1669,19 @@ public class ButtonFactory {
                 }
             }
         });
+=======
+        GridItemListener gridItemListener = new GridItemListener(toggleButton, view);
+        toggleButton.addItemListener(gridItemListener);
+
+        GridListener gridListener = new GridListener(toggleButton, view);
+        view.addPropertyChangeListener(gridListener);
+
+
         return toggleButton;
     }
+
+
+
 
     public static JPopupButton createStrokeCapButton(DrawingEditor editor) {
         return createStrokeCapButton(editor,

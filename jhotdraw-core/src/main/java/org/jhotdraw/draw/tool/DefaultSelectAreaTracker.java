@@ -110,26 +110,25 @@ public class DefaultSelectAreaTracker extends AbstractTool implements SelectArea
         if (view == null || editor.getActiveView() != view) {
             clearHoverHandles();
         } else {
-            // Search first, if one of the selected figures contains
-            // the current mouse location, and is selectable.
-            // Only then search for other
-            // figures. This search sequence is consistent with the
-            // search sequence of the SelectionTool.
             Figure figure = null;
-            Point2D.Double p = view.viewToDrawing(point);
-            for (Figure f : view.getSelectedFigures()) {
-                if (f.contains(p)) {
-                    figure = f;
-                }
-            }
-            if (figure == null) {
-                figure = view.findFigure(point);
-                while (figure != null && !figure.isSelectable()) {
-                    figure = view.getDrawing().findFigureBehind(p, figure);
-                }
-            }
-            updateHoverHandles(view, figure);
+            findFigures(view, point, figure);
         }
+    }
+
+    protected void findFigures(DrawingView view, Point point, Figure figure){
+        Point2D.Double p = view.viewToDrawing(point);
+        for (Figure f : view.getSelectedFigures()) {
+            if (f.contains(p)) {
+                figure = f;
+            }
+        }
+        if (figure == null) {
+            figure = view.findFigure(point);
+            while (figure != null && !figure.isSelectable()) {
+                figure = view.getDrawing().findFigureBehind(p, figure);
+            }
+        }
+        updateHoverHandles(view, figure);
     }
 
     @Override
