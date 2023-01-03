@@ -70,6 +70,7 @@ public class SelectionTool extends AbstractTool {
      */
     private DragTracker dragTracker;
 
+    //TODO extract class
     private class TrackerHandler extends ToolAdapter {
 
         @Override
@@ -292,6 +293,8 @@ public class SelectionTool extends AbstractTool {
         }
     }
 
+    //TODO code fragment
+    //create two new methods each for removing the tracker and creating the tracker
     protected void setTracker(Tool newTracker) {
         if (tracker != null) {
             tracker.deactivate(getEditor());
@@ -332,7 +335,6 @@ public class SelectionTool extends AbstractTool {
      * Method to get a {@code SelectAreaTracker} which handles user interaction
      * for selecting an area on the drawing.
      */
-    //TODO possible refactor candidate
     protected SelectAreaTracker getSelectAreaTracker() {
         if (selectAreaTracker == null) {
             selectAreaTracker = new DefaultSelectAreaTracker();
