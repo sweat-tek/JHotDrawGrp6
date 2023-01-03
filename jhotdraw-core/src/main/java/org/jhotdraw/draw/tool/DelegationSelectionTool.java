@@ -306,6 +306,7 @@ public class DelegationSelectionTool extends SelectionTool {
                     }
                 }
                 if (figureTool != null) {
+                    removeTracker(figureTool);
                     setTracker(figureTool);
                     figureTool.mousePressed(evt);
                 } else {
