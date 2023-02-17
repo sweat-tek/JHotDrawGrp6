@@ -9,13 +9,15 @@ package org.jhotdraw.samples.svg.gui;
 
 import java.awt.*;
 import java.beans.*;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.prefs.*;
 import javax.swing.*;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Disposable;
 import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.gui.JDisclosureToolBar;
-import static org.jhotdraw.gui.JDisclosureToolBar.DISCLOSURE_STATE_PROPERTY;
 import org.jhotdraw.util.prefs.PreferencesUtil;
 
 /**
@@ -33,10 +35,12 @@ public /*abstract*/ class AbstractToolBar extends JDisclosureToolBar implements 
     protected PropertyChangeListener eventHandler;
     protected LinkedList<Disposable> disposables = new LinkedList<Disposable>();
 
+    protected HashMap<Integer, StateStrategy> stateStrategyMap;
     /**
      * Creates new form.
      */
-    public AbstractToolBar() {
+    public AbstractToolBar(HashMap<Integer, StateStrategy> stateStrategyMap) {
+        this.stateStrategyMap = stateStrategyMap;
         initComponents();
         try {
             prefs = PreferencesUtil.userNodeForPackage(getClass());
@@ -148,6 +152,7 @@ public /*abstract*/ class AbstractToolBar extends JDisclosureToolBar implements 
             // one pixel wide and high.
             setLayout(new FlowLayout(FlowLayout.LEFT, 1, 1));
         }
+        @FeatureEntryPoint(value = "paint")
 
         @Override
         public void paint(Graphics g) {

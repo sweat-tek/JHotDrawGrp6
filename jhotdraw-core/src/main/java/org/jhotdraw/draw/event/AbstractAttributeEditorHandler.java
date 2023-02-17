@@ -19,6 +19,8 @@ import java.util.Set;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.UndoableEdit;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Disposable;
 import org.jhotdraw.api.gui.AttributeEditor;
 import org.jhotdraw.beans.WeakPropertyChangeListener;
@@ -83,6 +85,7 @@ public abstract class AbstractAttributeEditorHandler<T> implements Disposable {
             }
             updateAttributeEditor();
         }
+        @FeatureEntryPoint(value = "propertyChange")
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
@@ -166,6 +169,7 @@ public abstract class AbstractAttributeEditorHandler<T> implements Disposable {
         this(key, null, attributeEditor, drawingEditor, updateDrawingEditorDefaults);
     }
 
+    @FeatureEntryPoint(value = "AbstractAttributeEditorHandler")
     @SuppressWarnings("unchecked")
     public AbstractAttributeEditorHandler(AttributeKey<T> key, Map<AttributeKey<?>, Object> defaultAttributes, AttributeEditor<T> attributeEditor, DrawingEditor drawingEditor, boolean updateDrawingEditorDefaults) {
         eventHandler = new EventHandler();

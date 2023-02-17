@@ -42,6 +42,7 @@ public class FigureToolBar extends AbstractToolBar {
      * Creates new instance.
      */
     public FigureToolBar() {
+        super(null);
         labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
         setName(labels.getString(getID() + ".toolbar"));
         setDisclosureStateCount(3);

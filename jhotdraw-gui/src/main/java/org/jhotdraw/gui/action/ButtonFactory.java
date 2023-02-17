@@ -1669,7 +1669,6 @@ public class ButtonFactory {
                 }
             }
         });
-=======
         GridItemListener gridItemListener = new GridItemListener(toggleButton, view);
         toggleButton.addItemListener(gridItemListener);
 

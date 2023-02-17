@@ -41,6 +41,7 @@ public class LinkToolBar extends AbstractToolBar {
      * Creates new instance.
      */
     public LinkToolBar() {
+        super(null);
         labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
         setName(labels.getString(getID() + ".toolbar"));
         setDisclosureStateCount(3);

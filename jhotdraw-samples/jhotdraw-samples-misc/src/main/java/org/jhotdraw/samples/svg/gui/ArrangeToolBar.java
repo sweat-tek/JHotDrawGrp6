@@ -31,6 +31,7 @@ public class ArrangeToolBar extends AbstractToolBar {
      * Creates new instance.
      */
     public ArrangeToolBar() {
+        super(null);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
         setName(labels.getString(getID() + ".toolbar"));
     }

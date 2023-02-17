@@ -48,6 +48,7 @@ public class ActionsToolBar extends AbstractToolBar {
      * Creates new instance.
      */
     public ActionsToolBar() {
+        super(null);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
         setName(labels.getString(getID() + ".toolbar"));
     }

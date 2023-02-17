@@ -10,6 +10,8 @@ package org.jhotdraw.draw.event;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.gui.AttributeEditor;
 import org.jhotdraw.draw.AttributeKey;
 import org.jhotdraw.draw.Drawing;
@@ -26,6 +28,7 @@ import org.jhotdraw.draw.figure.Figure;
 public class DrawingAttributeEditorHandler<T> extends AbstractAttributeEditorHandler<T> {
 
     private Drawing drawing;
+    @FeatureEntryPoint(value = "DrawingAttributeEditorHandler")
 
     public DrawingAttributeEditorHandler(AttributeKey<T> key, AttributeEditor<T> attributeEditor, DrawingEditor drawingEditor) {
         super(key, attributeEditor, drawingEditor, false);
